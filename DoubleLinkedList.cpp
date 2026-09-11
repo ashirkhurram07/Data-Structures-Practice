@@ -55,6 +55,12 @@ class DLL
             head=nn;
             tail=nn;
         }
+        else
+        {
+            nn->prev=tail;
+            tail->next=nn;
+            tail=nn;
+        }
     }
 };
 int main()
