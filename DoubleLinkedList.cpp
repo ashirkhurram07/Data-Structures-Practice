@@ -112,6 +112,27 @@ class DLL
 			}
 		}
 	}
+	void insertAfterValue(int data,int val)
+	{
+		Node* temp=tail;
+		if(temp->data==val)
+		{
+			insertAtTail(data);
+		}
+		else
+		{
+			Node* nn=createNode(data);
+			while(temp!=tail&&temp->data!=val)
+			temp=temp->next;
+			if(temp!=tail)
+			{
+				nn->next=temp->next;
+				nn->prev=temp;
+				temp->next=nn;
+				nn->next->prev=nn;
+			}
+		}
+	}
 };
 int main()
 {
