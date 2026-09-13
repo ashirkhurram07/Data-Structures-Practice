@@ -64,13 +64,14 @@ class DLL
     }
     void insertAtLoc(int data,int loc)
     {
-		Node* newNode=createNode(data);
         if(loc==1)
         {
           insertAtHead(data);
+		  return;
         }
         else
         {
+			Node* newNode=createNode(data);
 			Node* temp=head;
             for(int i=1;i<loc&&temp!=tail;i++)
 			temp=temp->next;
@@ -79,16 +80,38 @@ class DLL
 				newNode->next=temp;
 				newNode->prev=temp->prev;
 				newNode->prev->next=newNode;
-				newNode->next->prev=newNode;
-			}
-			if(temp==tail)
-			{
-				delete newNode;
-				insertAtTail(data);
+				temp->prev=newNode;
 			}
 			else cout<<"Location doesn't exist"<<endl;
         }
     }
+	void insertBeforeValue(int data,int val)
+	{
+		Node* temp=head;
+		if(temp->data==val)
+		{
+			insertAtHead(data);
+		}
+		else
+		{
+			Node* nn=createNode(data);
+			while(temp!=NULL&&temp->data!=val)
+			{
+				temp=temp->next;
+			}
+			if(temp!=nullptr)
+			{
+				nn->next=temp;
+				nn->prev=temp->prev;
+				nn->prev->next=nn;
+				temp->prev=nn;
+			}
+			else
+			{
+				cout<<"Value not found."<<endl;
+			}
+		}
+	}
 };
 int main()
 {
