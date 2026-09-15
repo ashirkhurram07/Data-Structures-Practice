@@ -283,5 +283,25 @@ class DLL
 };
 int main()
 {
-
+    DLL dll;
+    dll.display();
+    dll.insertAtHead(10);
+    dll.display();
+    dll.insertAtTail(20);
+    dll.display();
+    dll.insertAfterValue(30,20);
+    dll.display();
+    dll.insertBeforeValue(15,20);
+    dll.display();
+    dll.insertAtLoc(50,5);
+    dll.display();
+    dll.deleteAtHead();
+    dll.display();
+    dll.deleteAtTail();
+    dll.display();
+    dll.deleteAtLoc(3);
+    dll.display();
+    dll.deleteAtVal(20);
+    dll.display();
+    
 }
