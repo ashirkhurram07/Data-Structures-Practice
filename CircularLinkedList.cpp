@@ -283,5 +283,10 @@ int main()
     cll.insertAtHead(30);
     cll.insertAtHead(40);
     cll.display();
+    cll.insertAtEnd(50);
+    cll.insertAfterValue(70,50);
+    cll.insertBeforeValue(60,70);
+    cll.insertAtLocation(80,6);
+    cll.display();
     return 0;
 }
