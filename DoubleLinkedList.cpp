@@ -73,16 +73,29 @@ class DLL
         {
 			Node* newNode=createNode(data);
 			Node* temp=head;
-            for(int i=1;i<loc&&temp!=tail;i++)
-			temp=temp->next;
-			if(temp!=tail)
+            for(int i=1;i<loc&&temp!=nullptr;i++)
+			{
+                temp=temp->next;
+                if(i+1==loc&&temp==nullptr)
+                {
+                    insertAtTail(data);
+                    delete newNode;
+                    return;
+                }
+            }
+			if(temp!=nullptr)
 			{
 				newNode->next=temp;
 				newNode->prev=temp->prev;
 				newNode->prev->next=newNode;
 				temp->prev=newNode;
+                return;
 			}
-			else cout<<"Location doesn't exist"<<endl;
+			else 
+            {
+                cout<<"Location doesn't exist"<<endl;
+                delete newNode;
+            }
         }
     }
 	void insertBeforeValue(int data,int val)
@@ -109,6 +122,7 @@ class DLL
 			else
 			{
 				cout<<"Value not found."<<endl;
+                delete nn;
 			}
 		}
 	}
@@ -121,6 +135,7 @@ class DLL
 		}
 		else
 		{
+            temp=head;
 			Node* nn=createNode(data);
 			while(temp!=tail&&temp->data!=val)
 			temp=temp->next;
@@ -131,6 +146,12 @@ class DLL
 				temp->next=nn;
 				nn->next->prev=nn;
 			}
+            else
+            {
+                cout<<"Value not found"<<endl;
+                delete nn;
+                return;
+            }
 		}
 	}
     void deleteAtHead()
@@ -197,7 +218,7 @@ class DLL
             {
                 temp=temp->next;
             }
-            if(temp!=tail)
+            if(temp!=tail&&temp!=nullptr)
             {
                 temp->prev->next=temp->next;
                 temp->next->prev=temp->prev;
@@ -254,6 +275,7 @@ class DLL
             while(temp!=nullptr)
             {
                 cout<<temp->data<<"<->";
+                temp=temp->next;
             }
             cout<<"NULL"<<endl;
         }
