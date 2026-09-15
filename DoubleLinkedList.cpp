@@ -192,7 +192,7 @@ class DLL
         }
         else
         {
-            Node* temp=head->next;
+            Node* temp=head;
             for(int i=1;i<loc&&temp!=nullptr;i++)
             {
                 temp=temp->next;
@@ -216,6 +216,46 @@ class DLL
         {
             cout<<"The list is already empty."<<endl;
             return;
+        }
+        if(head->data==val)
+        {
+            deleteAtHead();
+        }
+        else if(tail->data==val)
+        {
+            deleteAtTail();
+        }
+        else
+        {
+            Node* temp=head->next;
+            while(temp!=tail&&temp->data!=val)
+            {
+                temp=temp->next;
+            }
+            if(temp!=tail)
+            {
+                temp->prev->next=temp->next;
+                temp->next->prev=temp->prev;
+                delete temp;
+            }
+            else cout<<"Value not found."<<endl;
+        }
+    }
+    void display()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is empty"<<endl;
+            return;
+        }
+        else
+        {
+            Node* temp=head;
+            while(temp!=nullptr)
+            {
+                cout<<temp->data<<"<->";
+            }
+            cout<<"NULL"<<endl;
         }
     }
 };
