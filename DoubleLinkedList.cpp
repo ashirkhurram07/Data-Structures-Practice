@@ -133,6 +133,91 @@ class DLL
 			}
 		}
 	}
+    void deleteAtHead()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is already empty."<<endl;
+            return;
+        }
+        else
+        {
+            if(head->next==nullptr)
+            {
+                delete head;
+                head=nullptr;
+                tail=nullptr;
+            }
+            else
+            {
+                head=head->next;
+                delete head->prev;
+                head->prev=nullptr;
+            }
+        }
+    }
+    void deleteAtTail()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is already empty."<<endl;
+            return;
+        }
+        else
+        {
+            if(tail->prev==nullptr)
+            {
+                delete tail;
+                head=nullptr;
+                tail=nullptr;
+            }
+            else
+            {
+                tail=tail->prev;
+                delete tail->next;
+                tail->next=nullptr;
+            }
+        }
+    }
+    void deleteAtLoc(int loc)
+    {
+        if(isEmpty())
+        {
+            cout<<"List is already empty"<<endl;
+            return;
+        }
+        if(loc==1)
+        {
+            deleteAtHead();
+        }
+        else
+        {
+            Node* temp=head->next;
+            for(int i=1;i<loc&&temp!=nullptr;i++)
+            {
+                temp=temp->next;
+            }
+            if(temp!=tail)
+            {
+                temp->prev->next=temp->next;
+                temp->next->prev=temp->prev;
+                delete temp;
+            }
+            else if(temp==tail)
+            {
+                deleteAtTail();
+            }
+            else cout<<"Loc not found"<<endl;
+        }
+    }
+    void deleteAtVal(int val)
+    {
+        if(isEmpty())
+        {
+            cout<<"The list is already empty."<<endl;
+            return;
+        }
+    }
 };
 int main()
 {
