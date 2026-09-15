@@ -254,8 +254,34 @@ class CircularLinkedList
             cout<<"Invalid index..."<<endl;
         }
     }
+    void display()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is already empty."<<endl;
+            return;
+        }
+        else
+        {
+            Node* temp=tail->next;
+            do
+            {
+                cout<<temp->data<<"->";
+                temp=temp->next;
+            } while (temp!=tail->next);
+            cout<<"end reached"<<endl;
+            return;
+        }
+    }
 };
 int main()
 {
+    CircularLinkedList cll;
+    cll.display();
+    cll.insertAtHead(10);
+    cll.insertAtHead(20);
+    cll.insertAtHead(30);
+    cll.insertAtHead(40);
+    cll.display();
     return 0;
 }
