@@ -80,14 +80,19 @@ class DCLL
         {
             Node* nn=createNode(data);
             Node* temp=tail->next;
-            for(int i=1;i<loc&&temp!=tail;i++)
+            for(int i=1;i<loc&&(i==1||temp!=tail->next);i++)
             temp=temp->next;
-            if(temp!=tail)
+            if(temp!=tail->next)
             {
                 nn->next=temp;
                 nn->prev=temp->prev;
                 nn->prev->next=nn;
                 temp->prev= nn;
+                return;
+            }
+            else
+            {
+                cout<<"Value not found."<<endl;
                 return;
             }
         }
@@ -108,10 +113,10 @@ class DCLL
         else
         {
             temp=temp->next;
-            while(temp!=tail&&temp->data!=val)
+            while(temp!=tail->next&&temp->data!=val)
             temp=temp->next;
         
-            if(temp!=tail)
+            if(temp!=tail->next)
             {
                 nn->next=temp;
                 nn->prev=temp->prev;
@@ -158,8 +163,27 @@ class DCLL
             }
         }
     }
+    void display()
+    {
+        if(isEmpty())
+        {
+            cout<<"The list is empty"<<endl;
+            return;
+        }
+        Node* temp=tail->next;
+        do
+        {
+            cout<<temp->data<<"<-->";
+            temp=temp->next;
+        } while (temp!=tail->next);
+        
+    }
 };
 int main()
 {
+    DCLL ll;
+    ll.insertAtHead(10);
+    ll.insertAtTail(20);
+    ll.display();
     return 0;
 }
