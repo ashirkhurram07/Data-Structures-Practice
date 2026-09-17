@@ -68,6 +68,7 @@ class DCLL
     {
         if(isEmpty())
         {
+            if(loc==1){ insertAtHead(data);return;}
             cout<<"List is Empty"<<endl;
             return;
         }
@@ -109,17 +110,54 @@ class DCLL
             temp=temp->next;
             while(temp!=tail&&temp->data!=val)
             temp=temp->next;
-        }
-        if(temp!=tail)
-        {
-            nn->next=temp;
-            nn->prev=temp->prev;
-            nn->prev->next=nn;
-            temp->prev=nn;
-            return;
+        
+            if(temp!=tail)
+            {
+                nn->next=temp;
+                nn->prev=temp->prev;
+                nn->prev->next=nn;
+                temp->prev=nn;
+                return;
+            }
+            else
+                {
+                    cout<<"Value not found."<<endl;
+                    return;
+                }
         }
     }
-    
+    void insertAfterValue(int data, int val)
+    {
+        if(isEmpty())
+        {
+            cout<<"The list is empty"<<endl;
+            return;
+        }
+        Node* temp=tail;
+        Node* nn=createNode(data);
+        if(temp->data==val)
+        {
+            insertAtTail(data);
+        }
+        else
+        {
+            temp=temp->next;
+            while(temp!=tail&&temp->data!=val)
+            temp=temp->next;
+            if(temp!=tail)
+            {
+                nn->next=temp->next;
+                nn->prev=temp;
+                nn->next->prev=nn;
+                temp->next=nn;
+            }
+            else
+            {
+                cout<<"Value not found."<<endl;
+                return;
+            }
+        }
+    }
 };
 int main()
 {
