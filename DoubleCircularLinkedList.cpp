@@ -91,6 +91,35 @@ class DCLL
             }
         }
     }
+    void insertBeforeValue(int data,int val)
+    {
+        if(isEmpty())
+        {
+            cout<<"List is empty"<<endl;
+            return;
+        }
+        Node* temp=tail->next;
+        Node* nn=createNode(data);
+        if(temp->data==val)
+        {
+            insertAtHead(data);
+        }
+        else
+        {
+            temp=temp->next;
+            while(temp!=tail&&temp->data!=val)
+            temp=temp->next;
+        }
+        if(temp!=tail)
+        {
+            nn->next=temp;
+            nn->prev=temp->prev;
+            nn->prev->next=nn;
+            temp->prev=nn;
+            return;
+        }
+    }
+    
 };
 int main()
 {
