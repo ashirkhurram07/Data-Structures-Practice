@@ -163,6 +163,33 @@ class DCLL
             }
         }
     }
+    void deleteAtHead()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is already empty."<<endl;
+            return;
+        }
+        else
+        {
+            tail->next=tail->next->next;
+            delete tail->next->prev;
+            tail->next->prev=tail;
+        }
+    }
+    void deleteAtTail()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is already empty."<<endl;
+            return;
+        }
+        else
+        {
+            tail=tail->prev;
+            deleteAtHead();
+        }
+    }
     void display()
     {
         if(isEmpty())
