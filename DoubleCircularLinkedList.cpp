@@ -190,6 +190,69 @@ class DCLL
             deleteAtHead();
         }
     }
+    void deleteAtLoc(int loc)
+    {
+        if(isEmpty())
+        {
+            cout<<"List is already empty."<<endl;
+            return;
+        }
+        if(loc==1)
+        {
+            deleteAtHead();
+        }
+        else
+        {
+            Node* temp=tail->next;
+            for(int i=1;i<loc&&temp!tail;i++)
+            {
+                temp=temp->next;
+            }
+            if(temp!=tail)
+            {
+                temp->next=temp->next->next;
+                temp->next->prev=temp->prev;
+                delete temp;
+            }
+            else if(temp==tail)
+            {
+                deleteAtTail();
+            }
+            else cout<<"Loc not found"<<endl;
+        }
+    }
+    void deleteAtVal(int val)
+    {
+        if(isEmpty())
+        {
+            cout<<"List is already empty."<<endl;
+            return;
+        }
+        Node* temp=tail;
+        if(temp->data==val)
+        {
+            deleteAtTail();
+            return;
+        }
+        temp=temp->next;
+        if(temp->data==val)
+        {
+            deleteAtHead();
+        }
+        else
+        {
+            while(temp->next!=tail&&temp->data!=val)
+            temp=temp->next;
+            if(temp->next==tail&&temp->data!=val)
+            {
+                cout<<"Value not found"<<endl;
+                return;
+            }
+            temp->next=temp->next->next;
+            temp->next->prev=temp->prev;
+            delete temp;
+        }
+    }
     void display()
     {
         if(isEmpty())
@@ -202,8 +265,7 @@ class DCLL
         {
             cout<<temp->data<<"<-->";
             temp=temp->next;
-        } while (temp!=tail->next);
-        
+        } while (temp!=tail->next);   
     }
 };
 int main()
