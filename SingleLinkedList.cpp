@@ -317,38 +317,81 @@ class Linkedlist
         Node* temp=head;
         while(temp!=NULL)
         {
-            cout<<temp->data<<" ";
+            cout<<temp->data<<"->";
             temp=temp->next;
         }
-
+        cout<<"NULL"<<endl;
+    }
+    void moveLastToHead()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is empty."<<endl;
+        }
+        if(head->next==nullptr)
+        {
+            cout<<"Nothing to move"<<endl;
+            return;
+        }
+        Node* oldHead=head;
+        Node* current=head;
+        Node* previous=nullptr;
+        while(current->next!=nullptr)
+        {
+            previous=current;
+            current=current->next;
+        }
+        head=current;
+        current->next=oldHead;
+        previous->next=nullptr;
+    }
+    
+    void removeDuplicates()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is empty."<<endl;
+            return;
+        }
+        if(head->next==nullptr)
+        {
+            cout<<"List contains only 1 element."<<endl;
+            return;
+        }
+        Node* current=head->next;
+        Node* previous=head;
+        while(current!=nullptr)
+        {
+            if(previous->data==current->data)
+            {
+                Node* temp=current;
+                current=current->next;
+                previous->next=current;
+                delete temp;
+            }
+            else
+            {
+                previous=current;
+                current=current->next;
+            }
+        }
     }
 };
 int main()
 {
     Linkedlist ll;
 
-    ll.insertAtHead(15);
-    // ll.display();
-    ll.insertAtHead(12);
-    // ll.display();
-    ll.insertAtHead(13);
-    // ll.display();
-    ll.insertAtHead(19);
-    ll.insertAfterValue(20,12);
-    ll.deleteAtHead();
-    ll.deleteAtEnd();
-    ll.deleteAtValue(12);
-    ll.deleteLocation(1);
-    ll.insertAfterValue(21,20);
-    ll.insertAtEnd(22);
-    ll.insertAtLocation(23,4);
-    ll.insertBeforeValue(24,23);
-
-
-
+    ll.insertAtEnd(10);
+    ll.insertAtEnd(10);
+    ll.insertAtEnd(20);
+    ll.insertAtEnd(20);
+    ll.insertAtEnd(20);
+    ll.insertAtEnd(10);
+    ll.insertAtEnd(30);
+    ll.insertAtEnd(30);
     ll.display();
     cout<<endl;
-    ll.sortList();
+    ll.removeDuplicates();
     ll.display();
 }
 
