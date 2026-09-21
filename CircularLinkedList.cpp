@@ -273,20 +273,77 @@ class CircularLinkedList
             return;
         }
     }
+    void rotateLeft(int n)
+    {
+        if(isEmpty())
+        {
+            cout<<"List is empty."<<endl;
+        }
+        Node* temp=tail->next;
+        if(temp->next==tail)
+        {
+            cout<<"List has only 1 node"<<endl;
+            return;
+        }
+        for(int i=0;i<n;i++)
+        {
+            tail=tail->next;
+        }
+    }
+    void deleteBeforeValue(int val)
+    {
+        if(isEmpty())
+        {
+            cout<<"List is empty."<<endl;
+            return;
+        }
+        if(tail->next==tail)
+        {
+            cout<<"The list has only 1 element."<<endl;
+            return;
+        }
+        Node* temp=tail->next;  
+        bool isFound=false;
+        do
+        {
+            if(temp->next->next->data==val)
+            {
+                isFound=true;
+                break;
+            }
+            temp=temp->next;
+        }while(temp!=tail->next);
+        if(!isFound)
+        {
+            cout<<"Value not found"<<endl;
+            return;
+        }
+        Node* temp2=temp->next;
+        if(temp2==tail)
+        {
+            tail=temp;
+        }
+        temp->next=temp2->next;
+        delete temp2;
+    }
 };
 int main()
 {
     CircularLinkedList cll;
     cll.display();
-    cll.insertAtHead(10);
-    cll.insertAtHead(20);
-    cll.insertAtHead(30);
+    cll.insertAtHead(50);
     cll.insertAtHead(40);
+    cll.insertAtHead(30);
+    cll.insertAtHead(20);
+    cll.insertAtHead(10);
     cll.display();
-    cll.insertAtEnd(50);
-    cll.insertAfterValue(70,50);
-    cll.insertBeforeValue(60,70);
-    cll.insertAtLocation(80,6);
+    cll.deleteBeforeValue(60);
     cll.display();
+    // cll.rotateLeft(1);
+    // cll.display();
+    // cll.rotateLeft(1);
+    // cll.display();
+    // cll.rotateLeft(1);
+    // cll.display();
     return 0;
 }
