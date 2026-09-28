@@ -204,7 +204,7 @@ class DCLL
         else
         {
             Node* temp=tail->next;
-            for(int i=1;i<loc&&temp!tail;i++)
+            for(int i=1;i<loc&&temp!=tail;i++)
             {
                 temp=temp->next;
             }
