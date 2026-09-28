@@ -315,6 +315,11 @@ class Linkedlist
     void display()
     {
         Node* temp=head;
+        if(isEmpty())
+        {
+            cout<<"List is empty"<<endl;
+            return;
+        }
         while(temp!=NULL)
         {
             cout<<temp->data<<" ";
@@ -356,6 +361,45 @@ class Linkedlist
         slow->next=slow->next->next;
         delete temp;
     }
+    void removeKthNode(int k)
+    {
+        Node* temp=head;
+        if(isEmpty())
+        {
+            cout<<"List is empty."<<endl;
+            return;
+        }
+        if(temp->next==nullptr)
+        {
+            cout<<"Nothing to remove only 1 node."<<endl;
+            return;
+        }
+        int i=1;
+        Node* previous=nullptr;
+        while(temp!=nullptr)
+        {
+            if(i%k==0)
+            {
+                Node* nodetodel=temp;
+                temp=temp->next;
+                if(previous==nullptr)
+                {
+                    head=temp;
+                }
+                else
+                {
+                    previous->next=temp;
+                }
+                delete nodetodel; 
+            }
+            else
+            {
+                previous=temp;
+                temp=temp->next;
+            }
+            i++;
+        }
+    }
 };
 int main()
 {
@@ -367,9 +411,15 @@ int main()
     ll.insertAtHead(19);
     ll.insertAtHead(20);
     ll.insertAtHead(45);
+    ll.insertAtHead(15);
+    ll.insertAtHead(12);
+    ll.insertAtHead(13);
+    ll.insertAtHead(19);
+    ll.insertAtHead(20);
+    ll.insertAtHead(45);
     ll.display();
     cout<<endl;
-    ll.removeNthNode(3);
+    ll.removeKthNode(1);
     ll.display();
 }
 
