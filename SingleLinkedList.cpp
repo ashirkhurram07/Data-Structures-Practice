@@ -284,32 +284,106 @@ class Linkedlist
             }
         }
     }
-    void sortList()
+    void sortDesc()
     {
         if(isEmpty())
         {
             cout<<"List is empty"<<endl;
             return;
         }
+        if(head->next==nullptr)
+        {
+            cout<<"Nothing to sort."<<endl;
+            return;
+        }
         else
         {
             Node* temp=head;
-            while(temp->next!=NULL)
+            while(temp!=nullptr)
             {
                 Node* temp2=temp;
-                while(temp2->next!=NULL)
+                while(temp2!=nullptr)
                 {
-                    if(temp->data>temp2->data)
+                    if(temp2->data>temp->data)
                     {
-                        int var;
-                        var=temp->data;
-                        temp->data=temp2->data;
-                        temp2->data=var;
+                        int Temp;
+                        Temp=temp2->data;
+                        temp2->data=temp->data;
+                        temp->data=Temp;
                     }
                     temp2=temp2->next;
                 }
                 temp=temp->next;
             }
+        }
+    }
+    void sortAsc()
+    {
+        if(isEmpty())
+        {
+            cout<<"List is empty"<<endl;
+            return;
+        }
+        if(head->next==nullptr)
+        {
+            cout<<"Nothing to sort."<<endl;
+            return;
+        }
+        else
+        {
+            Node* temp=head;
+            while(temp!=nullptr)
+            {
+                Node* temp2=temp;
+                while(temp2!=nullptr)
+                {
+                    if(temp2->data<temp->data)
+                    {
+                        int Temp;
+                        Temp=temp2->data;
+                        temp2->data=temp->data;
+                        temp->data=Temp;
+                    }
+                    temp2=temp2->next;
+                }
+                temp=temp->next;
+            }
+        }
+    }
+    void swapPairs()
+    {
+        if (head == nullptr || head->next == nullptr)
+        {
+            return;
+        }
+
+        Node* current = head;
+        Node* previousPairTail = nullptr;
+
+        while (current != nullptr && current->next != nullptr)
+        {
+            Node* second = current->next;
+            Node* nextPair = second->next;
+
+            // Reverse the current pair
+            second->next = current;
+            current->next = nextPair;
+
+            // Connect the previous pair to this pair
+            if (previousPairTail == nullptr)
+            {
+                head = second;
+            }
+            else
+            {
+                previousPairTail->next = second;
+            }
+
+            // current is now the final node of the swapped pair
+            previousPairTail = current;
+
+            // Move to the next pair
+            current = nextPair;
         }
     }
     void display()
@@ -384,14 +458,14 @@ int main()
     ll.insertAtEnd(10);
     ll.insertAtEnd(10);
     ll.insertAtEnd(20);
-    ll.insertAtEnd(20);
+    ll.insertAtEnd(11);
     ll.insertAtEnd(20);
     ll.insertAtEnd(10);
-    ll.insertAtEnd(30);
-    ll.insertAtEnd(30);
+    ll.insertAtEnd(23);
+    ll.insertAtEnd(55);
     ll.display();
     cout<<endl;
-    ll.removeDuplicates();
+    ll.swapPairs();
     ll.display();
 }
 
