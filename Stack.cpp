@@ -31,7 +31,7 @@ int Stack::pop()
 {
     if (isEmpty())
     {
-        cout << "No more actions to undo" << endl;
+        cout << "No more actions" << endl;
         return -1;
     }
     Node* temp = top;
