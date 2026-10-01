@@ -18,6 +18,21 @@ class Queue
         front=rear=-1;
         count=0;
     }
+    int getSize()
+    {
+        return size;
+    }
+    void resize(int s)
+    {
+        int *newArray=new int[s];
+        for(int i=0;i<size;i++)
+        {
+            newArray[i]=array[i];
+        }
+        delete array;
+        array=newArray;
+        size=s;
+    }
     bool isEmpty()
     {
         return count==0;
@@ -26,11 +41,18 @@ class Queue
     {
         return count==size;
     }
-    void push(int val)
+    void enqueue(int val)
     {
         if(isFull())
         {
-            cout<<"Queue is full."<<endl;
+            char ch;
+            cout<<"Queue is full. Do you want to resize "<<endl;
+            cin>>ch;
+            if(ch=='y'||ch=='Y')
+            {
+                resize(size*2);
+            }
+            else
             return;
         }
         if(isEmpty())
@@ -77,18 +99,46 @@ class Queue
 };
 int main()
 {
+    int choice=-1;
     Queue q1(5);
-    q1.push(1);
-    q1.display();
-    q1.push(2);
-    q1.display();
-    q1.push(3);
-    q1.display();
-    q1.push(4);
-    q1.display();
-    q1.push(5);
-    q1.display();
-    cout<<q1.dequeue()<<endl;
-    q1.display();
+    while(choice)
+    {
+        cout<<"\nEnter: "<<endl;
+        cout<<"1. Add "<<endl;
+        cout<<"2. Delete"<<endl;
+        cout<<"3. Print"<<endl;
+        cout<<"4. Resize"<<endl;
+        cout<<"0. Exit"<<endl;
+        cin>>choice;
+        switch(choice)
+        {
+            case 0:
+            break;
+            
+            case 1:
+            int val;
+            cout<<"Enter value: ";
+            cin>>val;
+            q1.enqueue(val);
+            break;
+
+            case 2:
+            cout<<q1.dequeue();
+            break;
+
+            case 3:
+            cout<<"The Queue is: "<<endl;
+            q1.display();
+            break;
+
+            case 4:
+            q1.resize(q1.getSize()*2);
+            break;
+
+            default:
+            cout<<"Invalid..."<<endl;
+            break;
+        }
+    }
     return 0;
 }
