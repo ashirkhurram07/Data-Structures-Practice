@@ -47,8 +47,15 @@ class Queue
             return -1;
         }
         Node* temp=rear->next;
-        rear->next=temp->next;
         int val=temp->data;
+        if(temp==rear)
+        {
+            rear=nullptr;
+        }
+        else
+        {
+            rear->next=temp->next;
+        }
         delete temp;
         return val; 
     }
@@ -61,6 +68,22 @@ class Queue
             temp=temp->next;
         } while (temp!=rear->next);
         cout<<"end"<<endl;
+    }
+    ~Queue()
+    {
+        while(!isEmpty())
+        {
+            Node* temp=rear->next;   // front node
+            if(temp==rear)           // only one node
+            {
+                rear=nullptr;
+            }
+            else
+            {
+                rear->next=temp->next;
+            }
+            delete temp;
+        }
     }
 };
 int main()
